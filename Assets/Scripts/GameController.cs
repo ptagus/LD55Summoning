@@ -176,6 +176,10 @@ public class GameController : MonoBehaviour
 
     void CreateKey(bool ftime)
     {
+        if (end)
+        {
+            return;
+        }
         if (ftime)
         {
             return;
@@ -242,7 +246,11 @@ public class GameController : MonoBehaviour
     }
 
     void UpdateProgressBar(int i)
-    {
+    { 
+        if (end)
+        {
+            return;
+        }
         if (i > 0)
         {
             if (currentcombo >= toCombox2 && nowCombo == Combo.x1)
