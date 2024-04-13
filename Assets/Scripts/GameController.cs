@@ -21,6 +21,7 @@ public enum Combo
 }
 public class GameController : MonoBehaviour
 {
+    public Animator[] shamans;
     public Transform area;
     public float timetocreate;
     float createtimer;
@@ -149,6 +150,9 @@ public class GameController : MonoBehaviour
     {
         if (!main.isPlaying)
         {
+            foreach(Animator a in shamans)
+                a.enabled = true;
+
             main.Play();
 
             audios[0].Play();
@@ -335,11 +339,25 @@ public class GameController : MonoBehaviour
 
     void ShowWinPanel()
     {
+        main.volume = 0;
+        foreach(AudioSource a in audios)
+        {
+            a.volume = 0;
+        }
+        foreach (Animator a in shamans)
+            a.gameObject.SetActive(false);
         winPanel.SetActive(true);
     }
 
     void ShowLosePanel()
     {
+        main.volume = 0;
+        foreach (AudioSource a in audios)
+        {
+            a.volume = 0;
+        }
+        foreach (Animator a in shamans)
+            a.gameObject.SetActive(false);
         losePanel.SetActive(true);
     }
 
