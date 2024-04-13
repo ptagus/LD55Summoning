@@ -1790,8 +1790,8 @@ MonoBehaviour:
   - {fileID: 1871279244}
   - {fileID: 2101711500}
   area: {fileID: 595326095}
-  timetocreate: 2
-  timer: 25
+  timetocreate: 1.98
+  timer: 50
   main: {fileID: 267561687}
   audios:
   - {fileID: 625865796}

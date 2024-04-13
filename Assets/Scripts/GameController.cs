@@ -152,6 +152,7 @@ public class GameController : MonoBehaviour
         {
             foreach(Animator a in shamans)
                 a.enabled = true;
+
             main.Play();
 
             audios[0].Play();
