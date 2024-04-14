@@ -21,6 +21,7 @@ public enum Combo
 }
 public class GameController : MonoBehaviour
 {
+    public OnStart VsyaHyinya;
     public Transform area;
     public float timetocreate;
     float createtimer;
@@ -29,6 +30,9 @@ public class GameController : MonoBehaviour
     public int pointsToWin;
     bool end;
     public Animator[] shamans;
+    public Animator comboAnim, backAnim;
+    public AudioClip winMusic, loseMusic;
+    public float mainVolume;
 
     [Header("Audios")]
 
@@ -42,7 +46,6 @@ public class GameController : MonoBehaviour
 
     public float transparent_speed;
     public float directionspeed;
-    public GameObject comboIcon;
     List<KeyBehavior> keysArray = new List<KeyBehavior>();
     public Transform[] points;
     public GameObject[] keys;
@@ -72,6 +75,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         audioplays = new bool[audios.Length];
+        main.volume = maxVolumeForMain;
         progressBar.maxValue = pointsToWin;
         progressBar.value = 0;
         nowCombo = Combo.x1;
@@ -179,8 +183,9 @@ public class GameController : MonoBehaviour
             foreach (AudioSource a in audios)
                 a.Play();
 
-            comboIcon.GetComponent<Animator>().enabled = true;
-            
+            comboAnim.GetComponent<Animator>().enabled = true;
+            backAnim.GetComponent<Animator>().enabled = true;
+
             CreateKey(true);
             return;
         }
@@ -362,6 +367,7 @@ public class GameController : MonoBehaviour
         if (res)
         {
             baseSlaider = fullSlider;
+            allUI.SetActive(false);
             Invoke("ShowWinPanel", 2);
         }
         else
@@ -372,28 +378,36 @@ public class GameController : MonoBehaviour
 
     void ShowWinPanel()
     {
+        VsyaHyinya.AfterWinLose();
         allUI.SetActive(false);
-        main.volume = 0;
+        main.clip = winMusic;
+        main.Play();
+        main.volume = mainVolume;
         foreach(AudioSource a in audios)
         {
             a.volume = 0;
         }
         foreach (Animator a in shamans)
             a.gameObject.SetActive(false);
+        comboAnim.GetComponent<Animator>().enabled = false;
+        backAnim.GetComponent<Animator>().enabled = false;
         winPanel.SetActive(true);
     }
 
     void ShowLosePanel()
     {
+        VsyaHyinya.AfterWinLose();
         allUI.SetActive(false);
-        main.volume = 0;
+        main.clip = loseMusic;
+        main.Play();
         foreach (AudioSource a in audios)
         {
             a.volume = 0;
         }
         foreach (Animator a in shamans)
             a.gameObject.SetActive(false);
-        comboIcon.GetComponent<Animator>().enabled = false;
+        comboAnim.GetComponent<Animator>().enabled = false;
+        backAnim.GetComponent<Animator>().enabled = false;
         losePanel.SetActive(true);
     }
 

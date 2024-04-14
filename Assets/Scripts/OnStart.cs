@@ -69,10 +69,17 @@ public class OnStart : MonoBehaviour
     public void BeforeStart()
     {
         numb = true;
+        nums.SetActive(true);
         showStartPanel.SetActive(false);
         shamans.SetActive(true);
         foreach (GameObject go in DlyaVseiHyini)
             go.SetActive(true);
+    }
+
+    public void AfterWinLose()
+    {
+        foreach (GameObject go in DlyaVseiHyini)
+            go.SetActive(false);
     }
 
     void Shownums(int n)
