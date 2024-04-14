@@ -98,5 +98,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gc: {fileID: 0}
-  keyNum: 1
+  keyNum: 0
   img: {fileID: 6449458823263402108}

@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour
     float createtimer;
     bool createstart;
     public float timer;
+    public int pointsToWin;
     bool end;
 
     [Header("Audios")]
@@ -34,7 +35,7 @@ public class GameController : MonoBehaviour
     public AudioSource main;
     public AudioSource[] audios;
     public float maxVolumeForMain, maxVolumeForAudio1, maxVolumeForAudio2, maxVolumeForAudio3;
-    bool[] audioplays = new bool[3];
+    bool[] audioplays;
     public float speedVolume;
 
     [Header("KeysElements")]
@@ -52,17 +53,25 @@ public class GameController : MonoBehaviour
     public GameObject tap;
     public Slider progressBar;
     public GameObject winPanel, losePanel;
+    public GameObject[] comboSprites;
+    bool combospritechange;
+    GameObject tempCombo;
 
     [Header("Counter")]
 
     public int basepoint;
+    public int basepointNegative;
     public int toCombox2, toCombox3, toCombox4;
     public int combox1,combox2,combox3,combox4;
     int currentcombo = 0;
+    int signalcombocounter;
     Combo nowCombo;
     // Start is called before the first frame update
     void Start()
     {
+        audioplays = new bool[audios.Length];
+        progressBar.maxValue = pointsToWin;
+        progressBar.value = 0;
         nowCombo = Combo.x1;
         createtimer = 0;
         createstart = true;
@@ -74,26 +83,27 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            createstart = true;
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            createstart = false;
+            BtnPress(0);
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            BtnPress(0);
+            BtnPress(1);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            BtnPress(1);
+            BtnPress(2);
         }
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            BtnPress(2);
+            BtnPress(3);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            BtnPress(4);
         }
     }
 
@@ -135,6 +145,12 @@ public class GameController : MonoBehaviour
                 audioplays[2] = false;
             }
         }
+
+        if (combospritechange)
+        {
+            Signal();
+        }
+
         if (createstart)
         {
             createtimer += Time.fixedDeltaTime;
@@ -154,10 +170,8 @@ public class GameController : MonoBehaviour
                 a.enabled = true;
 
             main.Play();
-
-            audios[0].Play();
-            audios[1].Play();
-            audios[2].Play();
+            foreach (AudioSource a in audios)
+                a.Play();
             
             CreateKey(true);
             return;
@@ -170,7 +184,7 @@ public class GameController : MonoBehaviour
         {
             Invoke("BadCreateKey", 1.25f);
         }
-        CreateKey(false);
+        BadCreateKey();
     }
 
     void BadCreateKey()
@@ -218,7 +232,7 @@ public class GameController : MonoBehaviour
     public void DeleteFromList(KeyBehavior k, bool tap)
     {
         keysArray.Remove(k);
-        Destroy(k.gameObject);
+        k.AnimOnDestroy();        
         Debug.Log(keysArray.Count);
         if (!tap)
         {
@@ -232,13 +246,13 @@ public class GameController : MonoBehaviour
 
     public void Mistake()
     {
-        UpdateProgressBar(-1);
+        UpdateProgressBar(basepointNegative);
         tap.GetComponent<TextMeshProUGUI>().text = "CurCombo: " + currentcombo;
     }
 
     public void NotTap()
     {
-        UpdateProgressBar(-1);
+        UpdateProgressBar(basepointNegative);
         tap.GetComponent<TextMeshProUGUI>().text = "CurCombo: " + currentcombo;
     }
 
@@ -259,44 +273,32 @@ public class GameController : MonoBehaviour
         {
             if (currentcombo >= toCombox2 && nowCombo == Combo.x1)
             {
-                SetAudioPlay(0, true);
-                nowCombo = Combo.x2;
-                basepoint = combox2;
+                ComboChange(0, true, Combo.x2, combox2, true);
             }
             if (currentcombo >= toCombox3 && nowCombo == Combo.x2)
             {
-                SetAudioPlay(1, true);
-                nowCombo = Combo.x3;
-                basepoint = combox3;
+                ComboChange(1, true, Combo.x3, combox3, true);
             }
             if (currentcombo >= toCombox4 && nowCombo == Combo.x3)
             {
-                SetAudioPlay(2, true);
-                nowCombo = Combo.x4;
-                basepoint = combox4;
+                ComboChange(2, true, Combo.x4, combox4, true);
             }
         }
         else
         {
             if (nowCombo == Combo.x4)
             {
-                SetAudioPlay(2, false);
-                nowCombo = Combo.x3;
-                basepoint = combox3;
+                ComboChange(2, false, Combo.x3, combox3, false);
                 currentcombo = toCombox3;
             }
             if (nowCombo == Combo.x3)
             {
-                SetAudioPlay(1, false);
-                nowCombo = Combo.x2;
-                basepoint = combox2;
+                ComboChange(1, false, Combo.x2, combox2, false);
                 currentcombo = toCombox2;
             }
             if (nowCombo == Combo.x2)
             {
-                SetAudioPlay(0, false);
-                nowCombo = Combo.x1;
-                basepoint = combox1;
+                ComboChange(0, false, Combo.x1, combox1, false);
                 currentcombo = 0;
             }
             if (nowCombo == Combo.x1)
@@ -310,10 +312,53 @@ public class GameController : MonoBehaviour
         {
             progressBar.value = 0;
         }
-        if (progressBar.value >= progressBar.maxValue)
+        if (progressBar.value >= pointsToWin)
         {
             progressBar.value = progressBar.maxValue;
             Result(true);
+        }
+    }
+
+    void ComboChange(int audioclip, bool audiostart, Combo combo, int combomul, bool up)
+    {
+        SetAudioPlay(audioclip, audiostart);
+        nowCombo = combo;
+        basepoint = combomul;
+        ChangeComboSprites(combomul, up);
+    }
+
+    void ChangeComboSprites(int comborange, bool up)
+    {
+        if (up)
+        {
+            comboSprites[comborange - 1].SetActive(true);
+            tempCombo = comboSprites[comborange - 1];
+            combospritechange = true;
+        }
+        else
+        {
+            comboSprites[comborange].SetActive(false);
+        }        
+    }
+
+    void Signal()
+    {
+        if (combospritechange)
+        {
+            signalcombocounter++;
+            if (signalcombocounter % 5 == 0)
+            {
+                tempCombo.SetActive(true);
+            }
+            else
+            {
+                tempCombo.SetActive(false);
+            }
+            if (signalcombocounter > 49)
+            {
+                signalcombocounter = 0;
+                combospritechange = false;
+            }
         }
     }
 
