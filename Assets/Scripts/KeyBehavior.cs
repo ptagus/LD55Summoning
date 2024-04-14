@@ -51,6 +51,11 @@ public class KeyBehavior : MonoBehaviour
     {
         gc.DeleteFromList(this, false);
     }
+
+    public void AnimOnDestroy()
+    {
+        Destroy(this.gameObject);
+    }
 }
 
 
