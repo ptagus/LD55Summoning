@@ -21,7 +21,6 @@ public enum Combo
 }
 public class GameController : MonoBehaviour
 {
-    public Animator[] shamans;
     public Transform area;
     public float timetocreate;
     float createtimer;
@@ -29,6 +28,7 @@ public class GameController : MonoBehaviour
     public float timer;
     public int pointsToWin;
     bool end;
+    public Animator[] shamans;
 
     [Header("Audios")]
 
@@ -50,6 +50,7 @@ public class GameController : MonoBehaviour
 
     [Header("UI")]
 
+    public GameObject allUI;
     public TextMeshProUGUI Timer;
     public GameObject tap;
     public Slider progressBar;
@@ -74,8 +75,9 @@ public class GameController : MonoBehaviour
         progressBar.maxValue = pointsToWin;
         progressBar.value = 0;
         nowCombo = Combo.x1;
-        createtimer = 0;
+        createtimer = 2;
         createstart = true;
+        Debug.Log("Hi? Start");
     }
 
     // Update is called once per frame
@@ -377,6 +379,7 @@ public class GameController : MonoBehaviour
 
     void ShowWinPanel()
     {
+        allUI.SetActive(false);
         main.volume = 0;
         foreach(AudioSource a in audios)
         {
@@ -389,6 +392,7 @@ public class GameController : MonoBehaviour
 
     void ShowLosePanel()
     {
+        allUI.SetActive(false);
         main.volume = 0;
         foreach (AudioSource a in audios)
         {
