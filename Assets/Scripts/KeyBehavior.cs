@@ -29,7 +29,7 @@ public class KeyBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Translate(direction);
+        //transform.Translate(direction);
         c.a -= transtimer;
         img.color = c;
         //image.color = c;
