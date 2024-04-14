@@ -81,6 +81,14 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            SceneStart(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SceneStart(SceneManager.GetActiveScene().buildIndex - 1);
+        }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -284,26 +292,27 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            if (nowCombo == Combo.x4)
+            if (nowCombo == Combo.x1)
             {
-                ComboChange(2, false, Combo.x3, combox3, false);
-                currentcombo = toCombox3;
-            }
-            if (nowCombo == Combo.x3)
-            {
-                ComboChange(1, false, Combo.x2, combox2, false);
-                currentcombo = toCombox2;
+                basepoint = combox1;
+                currentcombo = 0;
             }
             if (nowCombo == Combo.x2)
             {
                 ComboChange(0, false, Combo.x1, combox1, false);
                 currentcombo = 0;
             }
-            if (nowCombo == Combo.x1)
+            if (nowCombo == Combo.x3)
             {
-                basepoint = combox1;
-                currentcombo = 0;
+                ComboChange(1, false, Combo.x2, combox2, false);
+                currentcombo = toCombox2;
             }
+            if (nowCombo == Combo.x4)
+            {
+                ComboChange(2, false, Combo.x3, combox3, false);
+                currentcombo = toCombox3;
+            }
+            
         }
         progressBar.value += i;
         if (progressBar.value < 0)
@@ -387,11 +396,16 @@ public class GameController : MonoBehaviour
         }
         foreach (Animator a in shamans)
             a.gameObject.SetActive(false);
+        comboIcon.GetComponent<Animator>().enabled = false;
         losePanel.SetActive(true);
     }
 
     void SceneStart(int i)
     {
+        if (SceneManager.sceneCount == i | i< 0)
+        {
+            return;
+        }
         SceneManager.LoadScene(i);
     }
 }
