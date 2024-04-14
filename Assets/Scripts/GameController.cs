@@ -56,7 +56,7 @@ public class GameController : MonoBehaviour
     public Slider progressBar;
     public Image baseSlaider, fullSlider;
     public GameObject winPanel, losePanel;
-    public GameObject[] comboSprites;
+    public Image[] comboSprites;
     bool combospritechange;
     GameObject tempCombo;
 
@@ -123,7 +123,7 @@ public class GameController : MonoBehaviour
         if (timer >= 0)
         {
             timer -= Time.fixedDeltaTime;
-            Timer.text = "Timer: " + (int)timer;
+            Timer.text = ""+(int)timer;
             if (timer <= 0 && createstart)
             {
                 Result(false);
@@ -338,21 +338,14 @@ public class GameController : MonoBehaviour
 
     void ChangeComboSprites(int comborange, bool up)
     {
-
+        Debug.Log("Comborabge" + comborange);
         if (up)
         {
-            comboSprites[comborange - 1].SetActive(true);
-            tempCombo = comboSprites[comborange - 1];
-            combospritechange = true;
-            if (comborange == 4)
-            {
-                comboIcon.GetComponent<Image>().enabled = true;
-            }
+            comboSprites[comborange - 1].enabled = true;
         }
         else
         {
-            comboIcon.GetComponent<Image>().enabled = false;
-            comboSprites[comborange].SetActive(false);
+            comboSprites[comborange].enabled = false;
         }        
     }
 
