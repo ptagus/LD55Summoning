@@ -123,7 +123,7 @@ public class GameController : MonoBehaviour
         if (timer >= 0)
         {
             timer -= Time.fixedDeltaTime;
-            Timer.text = "Timer: " + (int)timer;
+            Timer.text = ""+(int)timer;
             if (timer <= 0 && createstart)
             {
                 Result(false);
