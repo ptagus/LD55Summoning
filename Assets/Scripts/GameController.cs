@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
 
     public float transparent_speed;
     public float directionspeed;
+    public GameObject comboIcon;
     List<KeyBehavior> keysArray = new List<KeyBehavior>();
     public Transform[] points;
     public GameObject[] keys;
@@ -52,6 +53,7 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI Timer;
     public GameObject tap;
     public Slider progressBar;
+    public Image baseSlaider, fullSlider;
     public GameObject winPanel, losePanel;
     public GameObject[] comboSprites;
     bool combospritechange;
@@ -64,7 +66,6 @@ public class GameController : MonoBehaviour
     public int toCombox2, toCombox3, toCombox4;
     public int combox1,combox2,combox3,combox4;
     int currentcombo = 0;
-    int signalcombocounter;
     Combo nowCombo;
     // Start is called before the first frame update
     void Start()
@@ -81,12 +82,12 @@ public class GameController : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             BtnPress(0);
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             BtnPress(1);
         }
@@ -146,11 +147,6 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (combospritechange)
-        {
-            Signal();
-        }
-
         if (createstart)
         {
             createtimer += Time.fixedDeltaTime;
@@ -172,6 +168,8 @@ public class GameController : MonoBehaviour
             main.Play();
             foreach (AudioSource a in audios)
                 a.Play();
+
+            comboIcon.GetComponent<Animator>().enabled = true;
             
             CreateKey(true);
             return;
@@ -329,37 +327,22 @@ public class GameController : MonoBehaviour
 
     void ChangeComboSprites(int comborange, bool up)
     {
+
         if (up)
         {
             comboSprites[comborange - 1].SetActive(true);
             tempCombo = comboSprites[comborange - 1];
             combospritechange = true;
+            if (comborange == 4)
+            {
+                comboIcon.GetComponent<Image>().enabled = true;
+            }
         }
         else
         {
+            comboIcon.GetComponent<Image>().enabled = false;
             comboSprites[comborange].SetActive(false);
         }        
-    }
-
-    void Signal()
-    {
-        if (combospritechange)
-        {
-            signalcombocounter++;
-            if (signalcombocounter % 5 == 0)
-            {
-                tempCombo.SetActive(true);
-            }
-            else
-            {
-                tempCombo.SetActive(false);
-            }
-            if (signalcombocounter > 49)
-            {
-                signalcombocounter = 0;
-                combospritechange = false;
-            }
-        }
     }
 
     void SetAudioPlay(int audioclip, bool ready)
@@ -374,6 +357,7 @@ public class GameController : MonoBehaviour
         createstart = false;
         if (res)
         {
+            baseSlaider = fullSlider;
             Invoke("ShowWinPanel", 2);
         }
         else

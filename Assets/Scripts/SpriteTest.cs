@@ -32,12 +32,12 @@ public class SpriteTest : MonoBehaviour
 
         if (startfill)
         {
-            srfilled.size += sizeChanger;
+            srfilled.size -= sizeChanger;
         }
 
-        if (srfilled.size.y >= maxSize)
+        if (srfilled.size.y <=0)
         {
-            srfilled.size = new Vector2(srfilled.size.x, maxSize);
+            srfilled.size = new Vector2(srfilled.size.x, 0);
             startfill = false;
         }
     }
@@ -49,7 +49,7 @@ public class SpriteTest : MonoBehaviour
         else
         {
             startfill = false;
-            srfilled.size = new Vector2(srfilled.size.x, 0);
+            srfilled.size = new Vector2(srfilled.size.x, maxSize);
         }
     }
 }
