@@ -38,7 +38,7 @@ public class KeyBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (startfill)
+        if (startfill && !click)
         {
             srfilled.size += sizeChanger;
         }

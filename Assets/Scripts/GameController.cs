@@ -54,6 +54,7 @@ public class GameController : MonoBehaviour
     public GameObject[] keys;
     public float fillspeed;
     Vector2 startpoint;
+    Vector2 tempstartpoint;
 
     [Header("UI")]
 
@@ -218,12 +219,24 @@ public class GameController : MonoBehaviour
         if (ftime)
         {
             return;
-        } 
-        startpoint = points[Random.Range(0, points.Length)].position;
+        }
+
+        NewRandom();
         GameObject newKey = Instantiate(keys[Random.Range(0, keys.Length)]);
         newKey.GetComponent<KeyBehavior>().gc = this.GetComponent<GameController>();
         keysArray.Add(newKey.GetComponent<KeyBehavior>());
         newKey.GetComponent<KeyBehavior>().SetValue(transparent_speed, startpoint, fillspeed);
+    }
+
+    void NewRandom()
+    {
+        startpoint = points[Random.Range(0, points.Length)].position;
+        if (startpoint == tempstartpoint)
+        {
+            NewRandom();
+            return;
+        }
+        tempstartpoint = startpoint;
     }
 
     void BtnPress(int btnnum)
