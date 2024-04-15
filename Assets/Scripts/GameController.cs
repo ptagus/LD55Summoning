@@ -21,16 +21,6 @@ public enum Combo
 }
 public class GameController : MonoBehaviour
 {
-    [Header("For Test")]
-    public bool starttest;
-    public SpriteRenderer testsr;
-    bool bit;
-    public float bittimer;
-    public float startbitoffset;
-    public float colorspeed;
-    float tempbittimer;
-    Color testSpriteColor;
-    Color red = Color.red;
 
     [Header("Controllers")]
     public OnStart VsyaHyinya;
@@ -62,6 +52,7 @@ public class GameController : MonoBehaviour
     List<KeyBehavior> keysArray = new List<KeyBehavior>();
     public Transform[] points;
     public GameObject[] keys;
+    public float fillspeed;
     Vector2 startpoint;
 
     [Header("UI")]
@@ -173,29 +164,6 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (bit && starttest)
-        {
-            testSpriteColor.g += colorspeed;
-            testsr.color = testSpriteColor;
-            tempbittimer += Time.fixedDeltaTime;
-            if (tempbittimer > bittimer)
-            {
-                tempbittimer = 0;
-                testsr.color = Color.red;
-                testSpriteColor = Color.black;
-                TestFuncTakeABit(false);
-            }
-        }
-
-        if (createstart && starttest)
-        {
-            startbitoffset += Time.fixedDeltaTime;
-            if (startbitoffset >= timetocreate)
-            {
-                startbitoffset = 0;
-                TestFuncTakeABit(true);
-            }
-        }
 
         if (createstart)
         {
@@ -236,11 +204,6 @@ public class GameController : MonoBehaviour
         BadCreateKey();
     }
 
-    void TestFuncTakeABit(bool bittime)
-    {
-        bit = bittime;
-    }
-
     void BadCreateKey()
     {
         CreateKey(false);
@@ -260,7 +223,7 @@ public class GameController : MonoBehaviour
         GameObject newKey = Instantiate(keys[Random.Range(0, keys.Length)]);
         newKey.GetComponent<KeyBehavior>().gc = this.GetComponent<GameController>();
         keysArray.Add(newKey.GetComponent<KeyBehavior>());
-        newKey.GetComponent<KeyBehavior>().SetValue(transparent_speed, startpoint);
+        newKey.GetComponent<KeyBehavior>().SetValue(transparent_speed, startpoint, fillspeed);
     }
 
     void BtnPress(int btnnum)

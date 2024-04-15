@@ -5,6 +5,14 @@ using UnityEngine.UI;
 
 public class KeyBehavior : MonoBehaviour
 {
+    [Header("Fill sprite")]
+    float speed;
+    public SpriteRenderer srfilled;
+    public float maxSize;
+    bool startfill;
+    Vector2 sizeChanger;
+
+    [Header("Key")]
     public GameController gc;
     public Sprite[] spritetypes;
     public int keyNum;
@@ -17,7 +25,9 @@ public class KeyBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sizeChanger = new Vector2(0, speed);
         c = img.color;
+        startfill = true;
     }
 
     // Update is called once per frame
@@ -28,10 +38,16 @@ public class KeyBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        livetime -= Time.deltaTime;
-        if (livetime <= 0 && !click)
+        if (startfill)
         {
-                Miss();
+            srfilled.size += sizeChanger;
+        }
+
+        if (srfilled.size.y >= maxSize)
+        {
+            srfilled.size = new Vector2(srfilled.size.x, maxSize);
+            startfill = false;
+            Miss();
         }
 
         if (click)
@@ -45,8 +61,9 @@ public class KeyBehavior : MonoBehaviour
             DestroyIt();
         }
     }
-    public void SetValue(float time, Vector2 pos)
+    public void SetValue(float time, Vector2 pos, float speedfill)
     {
+        speed = speedfill;
         transtimer = time;
         transform.position = pos;
     }
@@ -55,7 +72,6 @@ public class KeyBehavior : MonoBehaviour
     {
         transtimer *= 4;
         click = true;
-        img.sprite = spritetypes[0];
         gc.DeleteFromList(this, false);
     }
 
@@ -68,6 +84,7 @@ public class KeyBehavior : MonoBehaviour
     {
         transtimer *= 4;
         img.sprite = spritetypes[1];
+        srfilled.enabled = false;
         click = true;
     }
 }
