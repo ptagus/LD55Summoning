@@ -1130,7 +1130,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 332996095, guid: 12cb30680eba3ae42a80605acc6e9dc3, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 1
   m_FillAmount: 1
@@ -2156,16 +2156,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2de76095bf796f46964ba713016749d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starttest: 0
-  testsr: {fileID: 0}
-  bittimer: 0
-  startbitoffset: 0
-  colorspeed: 0
   VsyaHyinya: {fileID: 2133668618}
   area: {fileID: 595326095}
   timetocreate: 1.98
   timer: 60
-  pointsToWin: 100
+  pointsToWin: 60
   shamans:
   - {fileID: 1259178170}
   - {fileID: 1871279244}
@@ -2185,7 +2180,7 @@ MonoBehaviour:
   maxVolumeForMain: 0.6
   maxVolumeForAudio1: 0.02
   maxVolumeForAudio2: 0.2
-  maxVolumeForAudio3: 0.01
+  maxVolumeForAudio3: 0.03
   speedVolume: 0.005
   transparent_speed: 0.01
   directionspeed: 0.04
@@ -2203,6 +2198,7 @@ MonoBehaviour:
   - {fileID: 1107451627404345879, guid: c8012b0c3200fce4b844b9ec78372c59, type: 3}
   - {fileID: 1107451627404345879, guid: 294bdf5adb5b8474aa7f109b58068c11, type: 3}
   - {fileID: 1107451627404345879, guid: d4e46c51ac2d4f14e98d5968f631e835, type: 3}
+  fillspeed: 0.015
   allUI: {fileID: 324112612}
   Timer: {fileID: 1981267998}
   tap: {fileID: 1682723565}

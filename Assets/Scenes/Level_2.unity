@@ -430,7 +430,7 @@ PrefabInstance:
     - target: {fileID: 1313988938627660757, guid: d1334abf61a366a45835f8a6fd28883f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 13d8335c6aa27e84fb494006af1ea88d, type: 3}
+      objectReference: {fileID: 21300000, guid: 357fadb9efee4334da3492c7d129fe4a, type: 3}
     - target: {fileID: 1806809887914149382, guid: d1334abf61a366a45835f8a6fd28883f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1447,7 +1447,7 @@ PrefabInstance:
     - target: {fileID: 7272753369901512545, guid: af3784941b30b3142b9b9d244a2dc838, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1540786886, guid: d665be6c8b0446845a64a4527a43e2e7, type: 3}
+      objectReference: {fileID: 733433305, guid: e134e6f1539b87b4ea409339edc0a93f, type: 3}
     - target: {fileID: 7365480582635756781, guid: af3784941b30b3142b9b9d244a2dc838, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2092,11 +2092,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2de76095bf796f46964ba713016749d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starttest: 0
-  testsr: {fileID: 0}
-  bittimer: 0
-  startbitoffset: 0
-  colorspeed: 0
   VsyaHyinya: {fileID: 2133668618}
   area: {fileID: 0}
   timetocreate: 1.98
@@ -2113,7 +2108,7 @@ MonoBehaviour:
   loseMusic: {fileID: 8300000, guid: 874ed0ab931e0f548af6fa2b75a09986, type: 3}
   mainVolume: 0.5
   spawnSpeedx2: 1
-  spawnSpeedx3: 0
+  spawnSpeedx3: 1.5
   main: {fileID: 267561687}
   audios:
   - {fileID: 625865796}
@@ -2139,6 +2134,7 @@ MonoBehaviour:
   - {fileID: 1107451627404345879, guid: c8012b0c3200fce4b844b9ec78372c59, type: 3}
   - {fileID: 1107451627404345879, guid: 294bdf5adb5b8474aa7f109b58068c11, type: 3}
   - {fileID: 1107451627404345879, guid: d4e46c51ac2d4f14e98d5968f631e835, type: 3}
+  fillspeed: 0.015
   allUI: {fileID: 324112612}
   Timer: {fileID: 2131545095}
   tap: {fileID: 1682723565}
