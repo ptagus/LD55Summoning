@@ -49,7 +49,7 @@ public class OnStart : MonoBehaviour
             {
                 c.a = 0;
                 fade = false;
-                ShowStartPanel();
+                fader.GetComponent<Image>().raycastTarget = false;
             }
         }
 
@@ -102,11 +102,6 @@ public class OnStart : MonoBehaviour
         ui.SetActive(true);
         game.SetActive(true);
         numb = false;
-    }
-
-    void ShowStartPanel()
-    {
-        showStartPanel.SetActive(true);
     }
 
     public void EndOfScene(int i)
