@@ -33,6 +33,7 @@ public class GameController : MonoBehaviour
     public Animator comboAnim, backAnim;
     public AudioClip winMusic, loseMusic;
     public float mainVolume;
+    public float spawnSpeedx2, spawnSpeedx3;
 
     [Header("Audios")]
 
@@ -191,11 +192,11 @@ public class GameController : MonoBehaviour
         }
         if (currentcombo >= toCombox2)
         {
-            Invoke("BadCreateKey", 0.75f);
+            Invoke("BadCreateKey", spawnSpeedx2);
         }
         if (currentcombo >= toCombox3)
         {
-            Invoke("BadCreateKey", 1.25f);
+            Invoke("BadCreateKey", spawnSpeedx3);
         }
         BadCreateKey();
     }

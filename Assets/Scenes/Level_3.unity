@@ -2262,6 +2262,8 @@ MonoBehaviour:
   winMusic: {fileID: 8300000, guid: 299d4bb42dd928f41a4f30db10221702, type: 3}
   loseMusic: {fileID: 8300000, guid: 874ed0ab931e0f548af6fa2b75a09986, type: 3}
   mainVolume: 0.5
+  spawnSpeedx2: 0.75
+  spawnSpeedx3: 1.25
   main: {fileID: 267561687}
   audios:
   - {fileID: 625865796}
@@ -2272,7 +2274,7 @@ MonoBehaviour:
   maxVolumeForAudio2: 0.1
   maxVolumeForAudio3: 0.3
   speedVolume: 0.005
-  transparent_speed: 0.02
+  transparent_speed: 0.01
   directionspeed: 0.04
   points:
   - {fileID: 1852231495}
