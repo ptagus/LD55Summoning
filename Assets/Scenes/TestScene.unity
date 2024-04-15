@@ -578,11 +578,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1532186148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &469000666 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 6449458823263402108, guid: a83c7c5daf9fce048adeb38b9d17cc39, type: 3}
-  m_PrefabInstance: {fileID: 1240743465}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &479997357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2234,11 +2229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2de76095bf796f46964ba713016749d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starttest: 0
-  testsr: {fileID: 469000666}
-  bittimer: 0.5
-  startbitoffset: 0.04
-  colorspeed: 0.2
   VsyaHyinya: {fileID: 2133668618}
   area: {fileID: 595326095}
   timetocreate: 1.98
@@ -2281,6 +2271,7 @@ MonoBehaviour:
   - {fileID: 1107451627404345879, guid: c8012b0c3200fce4b844b9ec78372c59, type: 3}
   - {fileID: 1107451627404345879, guid: 294bdf5adb5b8474aa7f109b58068c11, type: 3}
   - {fileID: 1107451627404345879, guid: d4e46c51ac2d4f14e98d5968f631e835, type: 3}
+  fillspeed: 0.05
   allUI: {fileID: 324112612}
   Timer: {fileID: 1981267998}
   tap: {fileID: 1682723565}
