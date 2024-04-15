@@ -75,6 +75,7 @@ public class GameController : MonoBehaviour
     public int toCombox2, toCombox3, toCombox4;
     public int combox1,combox2,combox3,combox4;
     int currentcombo = 0;
+    int tempkey, nowkey;
     Combo nowCombo;
     // Start is called before the first frame update
     void Start()
@@ -222,7 +223,8 @@ public class GameController : MonoBehaviour
         }
 
         NewRandom();
-        GameObject newKey = Instantiate(keys[Random.Range(0, keys.Length)]);
+        NewRandomKey();
+        GameObject newKey = Instantiate(keys[nowkey]);
         newKey.GetComponent<KeyBehavior>().gc = this.GetComponent<GameController>();
         keysArray.Add(newKey.GetComponent<KeyBehavior>());
         newKey.GetComponent<KeyBehavior>().SetValue(transparent_speed, startpoint, fillspeed);
@@ -237,6 +239,18 @@ public class GameController : MonoBehaviour
             return;
         }
         tempstartpoint = startpoint;
+        
+    }
+
+    void NewRandomKey()
+    {
+        nowkey = Random.Range(0, keys.Length);
+        if (nowkey == tempkey)
+        {
+            NewRandomKey();
+            return;
+        }
+        tempkey = nowkey;
     }
 
     void BtnPress(int btnnum)
@@ -384,6 +398,10 @@ public class GameController : MonoBehaviour
     {
         end = true;
         createstart = false;
+        foreach(KeyBehavior k in keysArray)
+        {
+            k.DestroyIt();
+        }
         if (res)
         {
             baseSlaider = fullSlider;
