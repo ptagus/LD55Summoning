@@ -2134,7 +2134,7 @@ MonoBehaviour:
   - {fileID: 1107451627404345879, guid: c8012b0c3200fce4b844b9ec78372c59, type: 3}
   - {fileID: 1107451627404345879, guid: 294bdf5adb5b8474aa7f109b58068c11, type: 3}
   - {fileID: 1107451627404345879, guid: d4e46c51ac2d4f14e98d5968f631e835, type: 3}
-  fillspeed: 0.015
+  fillspeed: 0.012
   allUI: {fileID: 324112612}
   Timer: {fileID: 2131545095}
   tap: {fileID: 1682723565}
