@@ -75,7 +75,7 @@ public class KeyBehavior : MonoBehaviour
         gc.DeleteFromList(this, false);
     }
 
-    void DestroyIt()
+    public void DestroyIt()
     {
         Destroy(this.gameObject);
     }
