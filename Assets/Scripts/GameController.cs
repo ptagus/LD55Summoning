@@ -21,6 +21,9 @@ public enum Combo
 }
 public class GameController : MonoBehaviour
 {
+
+    [Header("Controllers")]
+    public OnStart VsyaHyinya;
     public Transform area;
     public float timetocreate;
     float createtimer;
@@ -29,6 +32,10 @@ public class GameController : MonoBehaviour
     public int pointsToWin;
     bool end;
     public Animator[] shamans;
+    public Animator comboAnim, backAnim;
+    public AudioClip winMusic, loseMusic;
+    public float mainVolume;
+    public float spawnSpeedx2, spawnSpeedx3;
 
     [Header("Audios")]
 
@@ -42,11 +49,12 @@ public class GameController : MonoBehaviour
 
     public float transparent_speed;
     public float directionspeed;
-    public GameObject comboIcon;
     List<KeyBehavior> keysArray = new List<KeyBehavior>();
     public Transform[] points;
     public GameObject[] keys;
+    public float fillspeed;
     Vector2 startpoint;
+    Vector2 tempstartpoint;
 
     [Header("UI")]
 
@@ -72,12 +80,12 @@ public class GameController : MonoBehaviour
     void Start()
     {
         audioplays = new bool[audios.Length];
+        main.volume = maxVolumeForMain;
         progressBar.maxValue = pointsToWin;
         progressBar.value = 0;
         nowCombo = Combo.x1;
         createtimer = 2;
         createstart = true;
-        Debug.Log("Hi? Start");
     }
 
     // Update is called once per frame
@@ -157,6 +165,7 @@ public class GameController : MonoBehaviour
             }
         }
 
+
         if (createstart)
         {
             createtimer += Time.fixedDeltaTime;
@@ -179,18 +188,19 @@ public class GameController : MonoBehaviour
             foreach (AudioSource a in audios)
                 a.Play();
 
-            comboIcon.GetComponent<Animator>().enabled = true;
-            
+            comboAnim.GetComponent<Animator>().enabled = true;
+            backAnim.GetComponent<Animator>().enabled = true;
+
             CreateKey(true);
             return;
         }
         if (currentcombo >= toCombox2)
         {
-            Invoke("BadCreateKey", 0.75f);
+            Invoke("BadCreateKey", spawnSpeedx2);
         }
         if (currentcombo >= toCombox3)
         {
-            Invoke("BadCreateKey", 1.25f);
+            Invoke("BadCreateKey", spawnSpeedx3);
         }
         BadCreateKey();
     }
@@ -209,12 +219,24 @@ public class GameController : MonoBehaviour
         if (ftime)
         {
             return;
-        } 
-        startpoint = points[Random.Range(0, points.Length)].position;
+        }
+
+        NewRandom();
         GameObject newKey = Instantiate(keys[Random.Range(0, keys.Length)]);
         newKey.GetComponent<KeyBehavior>().gc = this.GetComponent<GameController>();
         keysArray.Add(newKey.GetComponent<KeyBehavior>());
-        newKey.GetComponent<KeyBehavior>().SetValue(transparent_speed, startpoint, new Vector2(0, directionspeed), keyTypes.main);
+        newKey.GetComponent<KeyBehavior>().SetValue(transparent_speed, startpoint, fillspeed);
+    }
+
+    void NewRandom()
+    {
+        startpoint = points[Random.Range(0, points.Length)].position;
+        if (startpoint == tempstartpoint)
+        {
+            NewRandom();
+            return;
+        }
+        tempstartpoint = startpoint;
     }
 
     void BtnPress(int btnnum)
@@ -240,7 +262,10 @@ public class GameController : MonoBehaviour
     public void DeleteFromList(KeyBehavior k, bool tap)
     {
         keysArray.Remove(k);
-        k.AnimOnDestroy();        
+        if (tap)
+        {
+            k.AnimOnDestroy();
+        }
         Debug.Log(keysArray.Count);
         if (!tap)
         {
@@ -362,6 +387,7 @@ public class GameController : MonoBehaviour
         if (res)
         {
             baseSlaider = fullSlider;
+            allUI.SetActive(false);
             Invoke("ShowWinPanel", 2);
         }
         else
@@ -372,28 +398,36 @@ public class GameController : MonoBehaviour
 
     void ShowWinPanel()
     {
+        VsyaHyinya.AfterWinLose();
         allUI.SetActive(false);
-        main.volume = 0;
+        main.clip = winMusic;
+        main.Play();
+        main.volume = mainVolume;
         foreach(AudioSource a in audios)
         {
             a.volume = 0;
         }
         foreach (Animator a in shamans)
             a.gameObject.SetActive(false);
+        comboAnim.GetComponent<Animator>().enabled = false;
+        backAnim.GetComponent<Animator>().enabled = false;
         winPanel.SetActive(true);
     }
 
     void ShowLosePanel()
     {
+        VsyaHyinya.AfterWinLose();
         allUI.SetActive(false);
-        main.volume = 0;
+        main.clip = loseMusic;
+        main.Play();
         foreach (AudioSource a in audios)
         {
             a.volume = 0;
         }
         foreach (Animator a in shamans)
             a.gameObject.SetActive(false);
-        comboIcon.GetComponent<Animator>().enabled = false;
+        comboAnim.GetComponent<Animator>().enabled = false;
+        backAnim.GetComponent<Animator>().enabled = false;
         losePanel.SetActive(true);
     }
 

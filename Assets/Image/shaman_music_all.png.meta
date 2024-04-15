@@ -119,6 +119,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -126,12 +139,12 @@ TextureImporter:
       name: shaman_music_all_0
       rect:
         serializedVersion: 2
-        x: 80
-        y: 0
-        width: 613.3333
-        height: 1080
+        x: 51
+        y: 1
+        width: 654
+        height: 1079
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,18 +160,18 @@ TextureImporter:
       name: shaman_music_all_1
       rect:
         serializedVersion: 2
-        x: 693
+        x: 725
         y: 0
-        width: 613.3333
+        width: 607
         height: 1080
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9494a1a52fb44c459df825677f0caa5
+      spriteID: fc41cce243516c14fb4b9496def55ef1
       internalID: -1171184163
       vertices: []
       indices: 
@@ -168,18 +181,18 @@ TextureImporter:
       name: shaman_music_all_2
       rect:
         serializedVersion: 2
-        x: 1306
+        x: 1335
         y: 0
-        width: 613.3333
+        width: 585
         height: 1080
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4e2f25ff41f3504d81b50d36f92a8d9
+      spriteID: d03b0e8a901f7a44494a18ecdfa92af2
       internalID: -1490704194
       vertices: []
       indices: 

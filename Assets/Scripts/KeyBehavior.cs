@@ -5,20 +5,29 @@ using UnityEngine.UI;
 
 public class KeyBehavior : MonoBehaviour
 {
+    [Header("Fill sprite")]
+    float speed;
+    public SpriteRenderer srfilled;
+    public float maxSize;
+    bool startfill;
+    Vector2 sizeChanger;
+
+    [Header("Key")]
     public GameController gc;
+    public Sprite[] spritetypes;
     public int keyNum;
+    public float livetime;
     float transtimer;
-    Vector2 direction;
-    keyTypes ktype;
-    bool del;
+    bool click;
     //public Image image;
     public SpriteRenderer img;
     Color c;
     // Start is called before the first frame update
     void Start()
     {
+        sizeChanger = new Vector2(0, speed);
         c = img.color;
-        //c = image.color;
+        startfill = true;
     }
 
     // Update is called once per frame
@@ -29,32 +38,54 @@ public class KeyBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //transform.Translate(direction);
-        c.a -= transtimer;
-        img.color = c;
-        //image.color = c;
-        if (c.a <= 0 && del == false)
+        if (startfill && !click)
         {
-            del = true;
+            srfilled.size += sizeChanger;
+        }
+
+        if (srfilled.size.y >= maxSize)
+        {
+            srfilled.size = new Vector2(srfilled.size.x, maxSize);
+            startfill = false;
+            Miss();
+        }
+
+        if (click)
+        {
+            c.a -= transtimer;
+            img.color = c;
+        }
+
+        if (c.a <= 0)
+        {
             DestroyIt();
         }
     }
-    public void SetValue(float time, Vector2 pos, Vector2 dir, keyTypes key)
+    public void SetValue(float time, Vector2 pos, float speedfill)
     {
+        speed = speedfill;
         transtimer = time;
         transform.position = pos;
-        direction = dir;
-        ktype = key;
+    }
+
+    void Miss()
+    {
+        transtimer *= 4;
+        click = true;
+        gc.DeleteFromList(this, false);
     }
 
     void DestroyIt()
     {
-        gc.DeleteFromList(this, false);
+        Destroy(this.gameObject);
     }
 
     public void AnimOnDestroy()
     {
-        Destroy(this.gameObject);
+        transtimer *= 4;
+        img.sprite = spritetypes[1];
+        srfilled.enabled = false;
+        click = true;
     }
 }
 

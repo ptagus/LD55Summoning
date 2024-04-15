@@ -49,7 +49,7 @@ public class OnStart : MonoBehaviour
             {
                 c.a = 0;
                 fade = false;
-                ShowStartPanel();
+                fader.GetComponent<Image>().raycastTarget = false;
             }
         }
 
@@ -69,10 +69,17 @@ public class OnStart : MonoBehaviour
     public void BeforeStart()
     {
         numb = true;
+        nums.SetActive(true);
         showStartPanel.SetActive(false);
         shamans.SetActive(true);
         foreach (GameObject go in DlyaVseiHyini)
             go.SetActive(true);
+    }
+
+    public void AfterWinLose()
+    {
+        foreach (GameObject go in DlyaVseiHyini)
+            go.SetActive(false);
     }
 
     void Shownums(int n)
@@ -95,11 +102,6 @@ public class OnStart : MonoBehaviour
         ui.SetActive(true);
         game.SetActive(true);
         numb = false;
-    }
-
-    void ShowStartPanel()
-    {
-        showStartPanel.SetActive(true);
     }
 
     public void EndOfScene(int i)
