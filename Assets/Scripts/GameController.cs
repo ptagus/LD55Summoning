@@ -21,6 +21,18 @@ public enum Combo
 }
 public class GameController : MonoBehaviour
 {
+    [Header("For Test")]
+    public bool starttest;
+    public SpriteRenderer testsr;
+    bool bit;
+    public float bittimer;
+    public float startbitoffset;
+    public float colorspeed;
+    float tempbittimer;
+    Color testSpriteColor;
+    Color red = Color.red;
+
+    [Header("Controllers")]
     public OnStart VsyaHyinya;
     public Transform area;
     public float timetocreate;
@@ -33,6 +45,7 @@ public class GameController : MonoBehaviour
     public Animator comboAnim, backAnim;
     public AudioClip winMusic, loseMusic;
     public float mainVolume;
+    public float spawnSpeedx2, spawnSpeedx3;
 
     [Header("Audios")]
 
@@ -81,7 +94,6 @@ public class GameController : MonoBehaviour
         nowCombo = Combo.x1;
         createtimer = 2;
         createstart = true;
-        Debug.Log("Hi? Start");
     }
 
     // Update is called once per frame
@@ -161,6 +173,30 @@ public class GameController : MonoBehaviour
             }
         }
 
+        if (bit && starttest)
+        {
+            testSpriteColor.g += colorspeed;
+            testsr.color = testSpriteColor;
+            tempbittimer += Time.fixedDeltaTime;
+            if (tempbittimer > bittimer)
+            {
+                tempbittimer = 0;
+                testsr.color = Color.red;
+                testSpriteColor = Color.black;
+                TestFuncTakeABit(false);
+            }
+        }
+
+        if (createstart && starttest)
+        {
+            startbitoffset += Time.fixedDeltaTime;
+            if (startbitoffset >= timetocreate)
+            {
+                startbitoffset = 0;
+                TestFuncTakeABit(true);
+            }
+        }
+
         if (createstart)
         {
             createtimer += Time.fixedDeltaTime;
@@ -191,13 +227,18 @@ public class GameController : MonoBehaviour
         }
         if (currentcombo >= toCombox2)
         {
-            Invoke("BadCreateKey", 0.75f);
+            Invoke("BadCreateKey", spawnSpeedx2);
         }
         if (currentcombo >= toCombox3)
         {
-            Invoke("BadCreateKey", 1.25f);
+            Invoke("BadCreateKey", spawnSpeedx3);
         }
         BadCreateKey();
+    }
+
+    void TestFuncTakeABit(bool bittime)
+    {
+        bit = bittime;
     }
 
     void BadCreateKey()
@@ -219,7 +260,7 @@ public class GameController : MonoBehaviour
         GameObject newKey = Instantiate(keys[Random.Range(0, keys.Length)]);
         newKey.GetComponent<KeyBehavior>().gc = this.GetComponent<GameController>();
         keysArray.Add(newKey.GetComponent<KeyBehavior>());
-        newKey.GetComponent<KeyBehavior>().SetValue(transparent_speed, startpoint, new Vector2(0, directionspeed), keyTypes.main);
+        newKey.GetComponent<KeyBehavior>().SetValue(transparent_speed, startpoint);
     }
 
     void BtnPress(int btnnum)
@@ -245,7 +286,10 @@ public class GameController : MonoBehaviour
     public void DeleteFromList(KeyBehavior k, bool tap)
     {
         keysArray.Remove(k);
-        k.AnimOnDestroy();        
+        if (tap)
+        {
+            k.AnimOnDestroy();
+        }
         Debug.Log(keysArray.Count);
         if (!tap)
         {
