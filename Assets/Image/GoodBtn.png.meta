@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9159e4a7cd91ed042ac6a7e6922c0e5d
+guid: ab3405991fa58e1458f06a42ab348872
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,10 +45,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 250
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 9c79cc0d5ff1a5ac_0
+      name: GoodBtn_0
       rect:
         serializedVersion: 2
-        x: 106
-        y: 425
-        width: 233
-        height: 234
+        x: 236
+        y: 399
+        width: 288
+        height: 287
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38d4f00ed87e52e4a93e4ff1be4b7ebb
-      internalID: 774814515
+      spriteID: 36fb82aa04c2f1645bf8cf39cc85c10f
+      internalID: -57835878
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 9c79cc0d5ff1a5ac_1
+      name: GoodBtn_1
       rect:
         serializedVersion: 2
-        x: 388
-        y: 421
-        width: 234
-        height: 234
+        x: 623
+        y: 394
+        width: 287
+        height: 287
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2fdab5ae392827b479aa7bab2212f1e0
-      internalID: 332217032
+      spriteID: 14469bf2581393e4da6f327238080a8c
+      internalID: 693154114
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 9c79cc0d5ff1a5ac_2
+      name: GoodBtn_2
       rect:
         serializedVersion: 2
-        x: 671
-        y: 423
-        width: 233
-        height: 234
+        x: 1010
+        y: 396
+        width: 287
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4178ae94d1ec8ef4db532a61fa65a2ec
-      internalID: -1352401993
+      spriteID: b44eee7ba4732394b8b26930cd6fddae
+      internalID: -1219512034
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 9c79cc0d5ff1a5ac_3
+      name: GoodBtn_3
       rect:
         serializedVersion: 2
-        x: 953
-        y: 424
-        width: 233
-        height: 233
+        x: 1396
+        y: 396
+        width: 288
+        height: 288
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,29 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 845a9986db73de24ca4441276ffcf31d
-      internalID: 2117221999
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 9c79cc0d5ff1a5ac_4
-      rect:
-        serializedVersion: 2
-        x: 1255
-        y: 450
-        width: 570
-        height: 184
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c102b2b4851257e449901b17243ee782
-      internalID: -1472583118
+      spriteID: 322eeacf0fd064143bfb74a161a2b1c5
+      internalID: 1035494158
       vertices: []
       indices: 
       edges: []
@@ -230,7 +209,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: bebfa5e9b5dfc06428125e21234a6a94
+    spriteID: 2a9092bc076c02445917ca6611f4adc6
     internalID: 0
     vertices: []
     indices: 
@@ -238,11 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      9c79cc0d5ff1a5ac_0: 774814515
-      9c79cc0d5ff1a5ac_1: 332217032
-      9c79cc0d5ff1a5ac_2: -1352401993
-      9c79cc0d5ff1a5ac_3: 2117221999
-      9c79cc0d5ff1a5ac_4: -1472583118
+      GoodBtn_0: -57835878
+      GoodBtn_1: 693154114
+      GoodBtn_2: -1219512034
+      GoodBtn_3: 1035494158
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
